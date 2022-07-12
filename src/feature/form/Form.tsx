@@ -1,18 +1,13 @@
 /** @jsxImportSource @emotion/react */
 import { css } from "@emotion/react";
-import { Formik, FormikHelpers } from "formik";
+import { Formik } from "formik";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import * as yup from "yup";
-
-interface Values {
-  firstName: string;
-  password: string;
-  email: string;
-  confirmPassword: string;
-}
+import { useSetting } from "./hooks/useSetting";
 
 export const Form = () => {
+  const { onSubmit} = useSetting()
   const validationsSchema = yup.object().shape({
     firstName: yup
       .string()
@@ -47,12 +42,7 @@ export const Form = () => {
         }}
         validateOnBlur
         validationSchema={validationsSchema}
-        onSubmit={(
-          values: Values,
-          { setSubmitting }: FormikHelpers<Values>
-        ) => {
-          console.log(values);
-        }}
+        onSubmit={onSubmit}
       >
         {({
           values,

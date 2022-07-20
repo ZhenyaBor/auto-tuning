@@ -3,34 +3,14 @@ import { css } from "@emotion/react";
 import { Formik } from "formik";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import * as yup from "yup";
+import { useValidation } from "./hooks/useValidation";
 import { useSetting } from "./hooks/useSetting";
 
-export const Form = () => {
-  const { onSubmit} = useSetting()
-  const validationsSchema = yup.object().shape({
-    firstName: yup
-      .string()
-      .min(2, "Более 2х ")
-      .typeError("Только буквы")
-      .required("Поле обязательно"),
-    email: yup
-      .string()
-      .email("Эмейл не верный")
 
-      .required("Поле обязательно"),
-    password: yup
-      .string()
-      .typeError("Только цыфры")
-      .min(4, "Минимальное колличество цыфр не меньше 4")
-      .required("Поле обязательно"),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("password")], "Пароли не совпадают")
-      .typeError("Только цыфры")
-      .min(4, "Минимальное колличество цыфр не меньше 4")
-      .required("Поле обязательно"),
-  });
+export const Form = () => {
+  const { validationsSchema } = useValidation()
+   const {onSubmit  } = useSetting()
+
   return (
     <div>
       <Formik

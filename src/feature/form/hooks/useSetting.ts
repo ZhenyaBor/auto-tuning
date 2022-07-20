@@ -5,20 +5,13 @@ interface Values {
     confirmPassword: string;
   }
 
+
 export const useSetting = () => {
 
-  const onSubmit = (values:Values) => {
-    console.log(values);
+    const onSubmit = (data:Values)=>{
+        console.log("evfbk"+ data.email)
+    }
+
+    return{onSubmit}
   };
-
-  return {
-    onSubmit,
-  };
-};
-
-
-
-
-
-
-
+  
